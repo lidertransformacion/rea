@@ -35,8 +35,8 @@ impuesto y la sociedad son distintos, y el punto no es dinero.
    solo lo muestra.
 2. Acumular y canjear ocurre en el pedido del POS, antes de cerrar la
    factura. Así el arreglo Jorels sigue teniendo un ticket real que corregir.
-3. En caja el cliente se identifica con el código de su tarjeta. Si el
-   alta pide cédula queda abierto; está en las decisiones del final.
+3. En caja el cliente se identifica con el código de su tarjeta. El alta
+   pide celular, correo, nombre y cédula, en un solo paso.
 4. El nivel mira visitas. El punto mira pesos elegibles. Son cuentas
    distintas, como en el programa cafetero de referencia, con umbrales
    propios.
@@ -162,19 +162,15 @@ La app no cobra en el MVP. Se paga en caja como hoy.
 
 ### Onboarding
 
-Tres pantallas, en este orden:
+El alta es un solo paso: celular, correo, nombre y cédula. Santiago lo cerró
+así. No hay carrusel antes del formulario.
 
-1. Qué es un punto y qué no es (no es plata, no se transfiere, vence por
-   inactividad).
-2. Celular y código.
-3. El código de caja, en grande, con la frase «muéstralo antes de pagar».
-
-Esas tres pantallas no incluyen la cédula. Si el alta la pide o no es una
-decisión abierta. En caja se usa el código de la tarjeta. En la prueba, el
-código de acceso se lee en la propia base de prueba: este trabajo no envía
-SMS, WhatsApp ni correo. Si marcar al miembro como cliente del pedido obliga
-a facturar a su nombre, el flujo de caja cambia y hay que verlo con quien
-opera Jorels, en la base de prueba.
+En caja se muestra el código de la tarjeta, en grande, con la frase
+«muéstralo antes de pagar». La prueba no envía SMS, WhatsApp ni correo: el
+código se lee en la base de prueba, y en el demo local aparece en la tarjeta.
+Pedir la cédula no decide a nombre de quién sale la factura. Si el POS obliga
+a facturar al miembro, eso se ve con quien opera Jorels, en la base de
+prueba.
 
 ### Notificaciones
 
@@ -342,7 +338,7 @@ siguiente sale si la fila anterior no facturó bien.
 | Jorels rechaza la nota de la recompensa                   | El premio no se enciende. No se parcha desde la app                             |
 | El cliente por defecto se queda con los puntos            | Se apaga en las cajas del piloto y se revisa en el cierre del día               |
 | El código corto se fotografía y se usa dos veces          | Un solo uso, vida de minutos, atado a la tarjeta                                |
-| Pedir la cédula en el alta                                | Sigue abierto. En caja se usa el código de la tarjeta                           |
+| La cédula del alta cambia el nombre de la factura         | El alta ya la pide. La factura se confirma con Jorels, en la base de prueba     |
 | Copiar umbrales de otra marca                             | Los de esta nota son hipótesis. Se recalculan con tickets de Libertario         |
 | Tratar el punto como pasivo financiero                    | El texto del programa dice que no es dinero ni es transferible. Legal lo revisa |
 
@@ -354,18 +350,20 @@ como extra opcional.
 
 Siguen sin dueño:
 
-1. **Cuenta de Apple Developer y emisor de Google Wallet.** Sin las dos, el
-   pase se queda en el JSON de muestra. El certificado, la contraseña y la
-   cuenta de servicio van a variables de entorno o a una bóveda. No al
-   repositorio.
+1. **Cuenta de Apple Developer y emisor de Google Wallet.** Siguen
+   pendientes. No hay deploy ni pase firmado. El demo dibuja la tarjeta en
+   el teléfono y nada más. El certificado, la contraseña y la cuenta de
+   servicio, cuando existan, van a variables de entorno o a una bóveda. No
+   al repositorio.
 2. **Tienda piloto y versión de Odoo.** La página pública no fija la
    versión. El QR de mesa y el botón de mesero se prueban en una base de
    prueba, nunca en `libertariocoffee.odoo.com`.
-3. **Cédula en el alta.** En caja basta el código de la tarjeta. Pedir el
-   documento al registrarse cambia el dato que se guarda y, quizá, a nombre
-   de quién sale la factura. Legal y cartera lo cierran.
+
+El alta ya no está abierta: pide celular, correo, nombre y cédula.
 
 ## Qué no se construyó
 
-No hay app, no hay módulo instalado y no hubo llamada a Odoo. No se envió
-correo ni mensaje. Las notas están fuera del sitio público de REA.
+No hay módulo de Odoo, no hay pase firmado y no hubo llamada a producción.
+No se envió correo ni mensaje. El demo local vive en
+`demo/libertario-fidelizacion` y se levanta con un comando de Node. Las
+notas siguen fuera del sitio público de REA.

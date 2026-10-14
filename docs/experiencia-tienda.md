@@ -1,8 +1,9 @@
 # Experiencia en tienda
 
 Cuatro piezas pedidas para la app de Libertario, leídas en fuentes públicas
-y en artefactos propios. Octubre de 2026. No se construyó la app y no se
-tocó Odoo de producción.
+y en artefactos propios. Octubre de 2026. Hay un demo local en
+`demo/libertario-fidelizacion`. No se tocó Odoo de producción y no hay
+deploy de Wallet.
 
 El mapa de marcas está en [estudio-fidelizacion.md](estudio-fidelizacion.md).
 El corte de producto, con estas decisiones ya aplicadas, está en
@@ -25,8 +26,8 @@ Santiago las cerró para el MVP:
    bloqueo. No sustituye el aviso ni abre el menú.
 
 Siguen abiertas, al final de la propuesta: la cuenta de Apple Developer, el
-emisor de Google Wallet, la tienda piloto, la versión de Odoo y si el alta
-pide cédula.
+emisor de Google Wallet, la tienda piloto y la versión de Odoo. El alta ya
+pide celular, correo, nombre y cédula, en un solo paso.
 
 ## Las cuatro piezas
 
