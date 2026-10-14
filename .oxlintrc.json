@@ -27,7 +27,7 @@
   },
   "overrides": [
     {
-      "files": ["demo/**/*.{js,mjs}"],
+      "files": ["demo/**/*.{js,mjs,ts,tsx}"],
       "env": { "node": true, "browser": true },
       "rules": {
         "complexity": "off",

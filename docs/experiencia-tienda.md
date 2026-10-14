@@ -3,7 +3,8 @@
 Cuatro piezas pedidas para la app de Libertario, leídas en fuentes públicas
 y en artefactos propios. Octubre de 2026. Hay un demo local en
 `demo/libertario-fidelizacion`. No se tocó Odoo de producción y no hay
-deploy de Wallet.
+deploy de Wallet. La interfaz del demo es de Libertario. Las otras marcas
+solo se leyeron para ver el uso, no para copiar su forma.
 
 El mapa de marcas está en [estudio-fidelizacion.md](estudio-fidelizacion.md).
 El corte de producto, con estas decisiones ya aplicadas, está en

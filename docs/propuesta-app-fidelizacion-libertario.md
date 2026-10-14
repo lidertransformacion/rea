@@ -96,27 +96,21 @@ acceso y en un día mejor, no en una máquina de puntos.
 Bajar de nivel no borra puntos. Solo cambia el beneficio del mes siguiente.
 Eso hay que decirlo en el alta, en una pantalla, no en un PDF.
 
-### Premios del MVP
+### Premios del programa vigente
 
-Tres, todos como recompensa de Odoo (`loyalty.reward`), con tope de precio
-para cuidar el margen:
+El demo usa el catálogo que ya está en la cuenta de la casa, no una tabla prestada:
 
-| Premio                                             | Costo visible | Tope                                                                                      | Tipo Odoo                                  |
-| -------------------------------------------------- | ------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------ |
-| Bebida de la casa, tamaño de la tienda             | 1.200 puntos  | El precio de esa bebida en la lista. Si elige algo más caro, paga la diferencia en el POS | Producto gratis o descuento hasta un monto |
-| Pastelería del día                                 | 800 puntos    | El ítem de pastelería más barato disponible, o un SKU fijo                                | Producto gratis                            |
-| 20 % en una bolsa de café en grano, una vez al mes | 2.000 puntos  | Un SKU de grano, no toda la tienda                                                        | Descuento sobre productos concretos        |
+| Premio                 | Puntos |
+| ---------------------- | ------ |
+| Americano Paz o Libre  | 700    |
+| Cappuccino Paz o Libre | 910    |
+| Croissant de almendras | 2.000  |
 
-El 20 % de Tostao' y el tope en dólares de Starbucks son referencias de
-problema (retorno y margen), no la tabla a copiar. Los costos de arriba son
-un punto de partida para que finanzas calcule el retorno sobre una visita
-media. Si la visita media en Colombia está lejos de $12.000 elegibles, 1.200
-puntos ( $120.000 acumulados ) puede ser demasiado lento o demasiado fácil.
-Se ajusta con un mes de tickets reales, no con la app en producción.
+Cada $100 en caja suman un punto. El alta deja un bono de 1.000. Los tres se piden hasta el 31 de diciembre de 2026 y se cambian enteros: no se completan con plata. El canje no suma puntos. El historial se anota por sede, por ejemplo Libertario calle 93. Si un lote vence dentro del mes, la casa lo dice; una cuenta nueva no tiene ese lote.
 
-McDonald's publica que no deja completar un premio con plata. Aquí la
-diferencia sí se paga, porque el menú de especialidad tiene precios
-distintos por origen. La diferencia no acumula puntos.
+La pantalla que los muestra es de Libertario. No repite la estructura ni el aspecto de las apps que se miraron para entender el uso.
+
+La tabla anterior, con 1.200, 800 y 2.000, era una hipótesis de margen antes de leer este catálogo. Finanzas puede revisarlo. El demo no la usa.
 
 ## Funcionalidades
 
@@ -124,9 +118,7 @@ distintos por origen. La diferencia no acumula puntos.
 
 El cliente puede:
 
-- Crear la cuenta con celular y un código de un solo uso. Nombre y correo.
-  La fecha de nacimiento es opcional y solo sirve para el beneficio de
-  cumpleaños.
+- Crear la cuenta con celular, correo, nombre y cédula, en un solo paso.
 - Ver saldo, puntos que faltan para el premio más cercano, nivel y la fecha
   en que el saldo vencería si no vuelve.
 - Mostrar el código de la tarjeta para que la caja lo escanee antes de
@@ -365,5 +357,6 @@ El alta ya no está abierta: pide celular, correo, nombre y cédula.
 
 No hay módulo de Odoo, no hay pase firmado y no hubo llamada a producción.
 No se envió correo ni mensaje. El demo local vive en
-`demo/libertario-fidelizacion` y se levanta con un comando de Node. Las
-notas siguen fuera del sitio público de REA.
+`demo/libertario-fidelizacion`: un proyecto Expo, web y nativo en el mismo
+código. Cómo levantarlo está en el README de esa carpeta. Las notas siguen
+fuera del sitio público de REA.

@@ -1,41 +1,47 @@
-# Demo local · fidelización Libertario
+# Libertario
 
-Un teléfono en el navegador, con la carta real y datos de prueba. No llama a
-Odoo, no firma pases de Apple o Google y no envía SMS ni correo.
+Demo local de la casa. Un solo proyecto Expo: la web sale como PWA y el mismo código queda listo para iOS y Android. No cobra, no llama a Odoo y no se despliega.
 
-## Cómo levantarlo
+Los números son los del programa vigente: cada $100 en caja suman un punto; el bono de bienvenida son 1.000; el americano Paz o Libre cuesta 700, el cappuccino Paz o Libre 910 y el croissant de almendras 2.000. Los premios se piden hasta el 31 de diciembre de 2026. El historial se anota por sede, por ejemplo Libertario calle 93.
 
-Desde la raíz del repositorio, con Node 20 o superior:
+La interfaz es de Libertario, sobre blanco. El tueste y la tinta son acentos, no el fondo. Las otras apps solo sirvieron para ver qué tenía que poder hacerse. No se copió su aspecto ni su estructura.
+
+## Web
 
 ```bash
-node demo/libertario-fidelizacion/server.mjs
+cd demo/libertario-fidelizacion
+npm ci
+npm run web
 ```
 
-Abre [http://127.0.0.1:4173](http://127.0.0.1:4173). Otro puerto: `PORT=4180 node demo/libertario-fidelizacion/server.mjs`.
+Se abre en el puerto 8081. El arranque muestra la tostión y luego pide celular, correo, nombre y cédula.
 
-No hace falta `npm install` para este demo. Si alguna variable de entorno
-apunta a `libertariocoffee.odoo.com`, el proceso se niega a arrancar.
+El código del mostrador se calcula en el teléfono y se guarda en el almacenamiento local. Se ve sin red. La geocerca, el aviso y la tarjeta de Wallet están apagados: quedan para el binario nativo, cuando existan las cuentas de Apple y de Google.
 
-## Qué se puede recorrer
+Para dejar la web instalable:
 
-1. **Bienvenida.** Portada de la marca.
-2. **Alta.** Un paso: celular, correo, nombre y cédula.
-3. **Casa.** Puntos, ocho sellos y la tarjeta. El saldo inicial (860 pts, 3 sellos) es de demostración.
-4. **Tarjeta.** La misma tarjeta en grande. Wallet queda pendiente: no hay pase descargable.
-5. **Llegada.** Eliges una sede de Bogotá. Sale la promo de esa tienda, con reloj de 45 minutos, y se abre su menú. La coordenada no se envía.
-6. **Menú.** Búsqueda, categoría, rango de precio, “con mis puntos”, vegetal y orden. Precios y textos salen del PDF de la carta.
-7. **Producto.** Canje con puntos, sumar a la mesa o registrar la compra de caja (suma puntos y un sello).
-8. **Mesa.** QR, número de mesa, comanda sin pago y llamar al mesero.
-9. **Caja de la mesa.** “Marcar cobrado en caja” acredita los puntos del pedido y un sello. Lo canjeado queda en $0 y no vuelve a sumar.
+```bash
+npx expo export -p web
+```
 
-El octavo sello deja un filtrado PAZ de 8 oz para reclamar en caja y vacía la tira.
+El manifiesto está en `public/manifest.json`. El service worker no se registra en localhost.
 
-## De dónde salen los datos
+## Nativo
 
-`public/menu.json` copia nombres, precios y descripciones de la carta en PDF.
-Las fotos son recortes de esa carta, pasados de CMYK a RGB. Las sedes son las
-publicadas en libertariocoffee.com. El mapa es ilustrado.
+```bash
+npm start
+```
 
-El servidor guarda miembros, comandas y avisos al mesero solo en memoria.
-Al cerrarlo, se borran. El navegador también recuerda la sesión en
-`localStorage`.
+Ese comando abre el mismo proyecto. En un Mac, `npm run ios`. Con un emulador, `npm run android`. Hace falta un development build si se agregan módulos que Expo Go no trae. En Android de gama media el vidrio de la barra baja es un fondo sólido, sin blur, para no gastar el teléfono. En iOS y en la web el blur es ligero y solo está en esa barra y en la tarjeta del mostrador.
+
+`src/nativo.ts` deja `geocerca`, `aviso` y `wallet` en falso. No se encienden en la web.
+
+## Qué se recorre
+
+1. Tostión, al abrir y al sumar una taza.
+2. Alta en un paso. Entran 1.000 puntos de bienvenida.
+3. Casa: saldo, lo que vence este mes, ocho tazas, el código del mostrador, lo que se cambia por puntos y el historial por sede.
+4. Carta: búsqueda, índice, precio, vegetal, sin nueces. «Pasar la carta» abre el libro.
+5. Mesa: código de la mesa, comanda, aviso en sala. El cobro no ocurre aquí.
+
+Si `EXPO_PUBLIC_ODOO_URL` apunta a `libertariocoffee.odoo.com`, la demo no arranca.
