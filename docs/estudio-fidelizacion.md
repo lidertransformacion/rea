@@ -9,7 +9,9 @@ y fichas públicas. Cada fila dice de qué fuente sale y qué queda sin saber.
 
 REA entra como método de evidencia cuando el artefacto sea propio o esté
 autorizado. El análisis de la herramienta está en
-[analisis-rea.md](analisis-rea.md). La propuesta de producto está en
+[analisis-rea.md](analisis-rea.md). La llegada a tienda, los pases y el QR
+de mesa están en [experiencia-tienda.md](experiencia-tienda.md). La
+propuesta de producto está en
 [propuesta-app-fidelizacion-libertario.md](propuesta-app-fidelizacion-libertario.md).
 
 ## Alcance
@@ -269,6 +271,12 @@ como especificación:
 6. La red multimarca (Leal, Puntos Colombia) diluye la marca. Libertario
    compite por hábito en tienda propia.
 
+La geocerca, el pase con sellos, el QR de mesa y la comparación con el
+pedido de WeChat o Alipay están en
+[experiencia-tienda.md](experiencia-tienda.md). Ahí también quedaron dos
+decisiones del MVP: el pago es en caja, y la promo es un push nativo de la
+geocerca de la app. La ubicación del Wallet es un extra opcional.
+
 ## Integración POS, en abstracto
 
 Ninguna fuente pública de arriba entrega el contrato técnico con el POS. Lo
@@ -300,5 +308,9 @@ sustituye una orden de prueba en el POS.
 | Tasa de puntos de cada marca dentro de Leal                              | Abierta                                                                                                   |
 | Versión exacta de Odoo en Libertario y reglas ya configuradas de loyalty | Abierta. La página pública muestra apps y un módulo de redención con Jorels; no es un inventario auditado |
 | Si una sesión propia de cliente viola algún término al tomar notas       | Abierta hasta leer el término de cada app el día de la visita                                             |
+| Geocerca de MiMcDonald's en Colombia                                     | Abierta. Lo publicado con detalle es de Estados Unidos                                                    |
+| Pases de Wallet de estas marcas                                          | Abierta. No aparecieron en las páginas leídas                                                             |
+| Pago en mesa frente a pago en caja, para Libertario                      | Cerrada: se paga en caja. Ver la experiencia de tienda                                                    |
+| Push de la app frente a ubicación del Wallet                             | Cerrada: push nativo con geocerca. El Wallet es extra                                                     |
 
 Esas filas no se cierran con ingeniería inversa del binario.

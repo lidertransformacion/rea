@@ -11,6 +11,7 @@ export default defineConfig({
     "analisis-rea.md",
     "estudio-fidelizacion.md",
     "propuesta-app-fidelizacion-libertario.md",
+    "experiencia-tienda.md",
   ],
   themeConfig: {
     nav: [

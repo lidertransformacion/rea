@@ -293,6 +293,23 @@ Filas de `members` con `--table members --row-limit 5`, 869 ms, Evidence
 El lector copia en privado y no modifica el archivo de origen. No sirve para
 una base cifrada, un WAL a medias o una recuperación forense.
 
+### Paquete de Wallet y llegada a tienda
+
+Sobre archivos propios, para la experiencia de tienda. El detalle y los
+límites están en [experiencia-tienda.md](experiencia-tienda.md).
+
+`inspect-artifact` sobre un `.pkpass` de muestra, sin firma, 1630 bytes.
+Evidence `ev_387ec1818d0ba18e51d5cfe95c80afb977240348a7a925de8b2289a38bd16f4d`,
+`confidence: observed`. Inventarió `pass.json`, `manifest.json`, `icon.png`,
+`logo.png` y `strip.png`. No hay `signature`. La limitación dice que no
+interpreta el formato: los puntos y los sellos escritos en el JSON no son
+una lectura de REA.
+
+`analyze-javascript-application` sobre el directorio `arrival`. Evidence
+`ev_379041ebd06fa8c5f5715286ab196e9870ed5440c08cbf9d3486c34dabd96e5d`,
+`confidence: derived`. El import `./menu.js` resolvió a `src/menu.js` con
+estado `inferred`.
+
 ## Lectura para Libertario
 
 REA sirve, en este repo y en esta máquina, para inspección estática de
@@ -307,5 +324,7 @@ permita. No es un permiso para extraer el código de Leal, McDonald's o Juan
 Valdez.
 
 El plan de ese estudio está en [estudio-fidelizacion.md](estudio-fidelizacion.md).
-La propuesta de producto, sin construirla, está en
+La llegada a tienda, los pases y el QR de mesa están en
+[experiencia-tienda.md](experiencia-tienda.md). La propuesta de producto,
+sin construirla, está en
 [propuesta-app-fidelizacion-libertario.md](propuesta-app-fidelizacion-libertario.md).

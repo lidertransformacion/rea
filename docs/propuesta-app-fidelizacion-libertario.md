@@ -2,8 +2,9 @@
 
 Diseño, sin construcción. Libertario Coffee Roasters, octubre de 2026.
 El contexto de mercado está en [estudio-fidelizacion.md](estudio-fidelizacion.md).
-La herramienta de análisis, y lo que no hace, está en
-[analisis-rea.md](analisis-rea.md).
+La llegada a tienda, los pases y el QR de mesa están en
+[experiencia-tienda.md](experiencia-tienda.md). La herramienta de análisis,
+y lo que no hace, está en [analisis-rea.md](analisis-rea.md).
 
 Esto no es asesoría legal, fiscal ni de protección de datos. Las reglas de
 DIAN, SII y tratamiento de datos las tiene que cerrar el equipo jurídico y
@@ -34,17 +35,22 @@ impuesto y la sociedad son distintos, y el punto no es dinero.
    solo lo muestra.
 2. Acumular y canjear ocurre en el pedido del POS, antes de cerrar la
    factura. Así el arreglo Jorels sigue teniendo un ticket real que corregir.
-3. El cliente se identifica con un código de su tarjeta de lealtad, no
-   dictando la cédula. Menos dato en voz alta, menos error de digitación.
+3. En caja el cliente se identifica con el código de su tarjeta. Si el
+   alta pide cédula queda abierto; está en las decisiones del final.
 4. El nivel mira visitas. El punto mira pesos elegibles. Son cuentas
    distintas, como en el programa cafetero de referencia, con umbrales
    propios.
 5. El canje no genera puntos. La propina tampoco. El impuesto no debería;
    hay que confirmarlo contra la base del POS (con o sin IVA).
-6. No hay saldo prepago ni wallet en el MVP. Eso es dinero del cliente y
-   otro control. Odoo sabe hacer gift card y eWallet; se dejan para una
-   fase posterior, si finanzas los pide.
+6. No hay saldo prepago ni eWallet de Odoo en el MVP. Eso es dinero del
+   cliente. La tarjeta de Apple Wallet y la de Google Wallet sí entran:
+   muestran sellos y puntos, y no guardan plata.
 7. No hay red de marcas. Libertario no es Leal.
+8. Se paga en caja. El pedido de la mesa no cobra. No hay pago dentro de
+   la app.
+9. La promo de llegada es una notificación local disparada por la geocerca
+   de la app, y abre el menú de esa sede. La ubicación del pase es un extra
+   opcional.
 
 ### Moneda de cara al cliente
 
@@ -143,10 +149,10 @@ La app no cobra en el MVP. Se paga en caja como hoy.
 ### Explícitamente fuera del MVP
 
 - Pedido anticipado y recoger en tienda.
-- Pago en la app, PSE, Nequi, Daviplata o tarjeta guardada.
+- Pago en la app o en la mesa, incluido PSE, Nequi, Daviplata o tarjeta guardada.
 - Saldo prepago, gift card y Leal Coins propios.
 - Chile, y el resto de países.
-- Notificación push de marketing.
+- Promo por la ubicación del Wallet. Puede sumarse después; no es el canal.
 - Niveles Barra y Oficio automatizados. En el MVP todos son Casa; el
   cálculo de visitas se deja listo en el modelo, apagado.
 - Retos, juegos, referidos y puntos por abrir la app.
@@ -163,35 +169,35 @@ Tres pantallas, en este orden:
 2. Celular y código.
 3. El código de caja, en grande, con la frase «muéstralo antes de pagar».
 
-El documento de identidad no se pide en el alta. En Colombia mucha venta de
-mostrador queda como consumidor final. Pedir la cédula el primer día copia
-la fricción de Leal y de Tostao' y aumenta el dato personal sin hacer falta
-para acumular. El documento entra solo cuando la persona pide factura a su
-nombre. Esa decisión hay que ensayarla en un POS de prueba: si marcar al
-miembro como cliente del pedido obliga a facturar a su nombre, el flujo de
-caja cambia y hay que diseñarlo con quien opera Jorels, no con la app.
+Esas tres pantallas no incluyen la cédula. Si el alta la pide o no es una
+decisión abierta. En caja se usa el código de la tarjeta. En la prueba, el
+código de acceso se lee en la propia base de prueba: este trabajo no envía
+SMS, WhatsApp ni correo. Si marcar al miembro como cliente del pedido obliga
+a facturar a su nombre, el flujo de caja cambia y hay que verlo con quien
+opera Jorels, en la base de prueba.
 
 ### Notificaciones
 
-| Momento                    | Canal en el MVP                                                   | Por qué                                                              |
-| -------------------------- | ----------------------------------------------------------------- | -------------------------------------------------------------------- |
-| Código de acceso           | SMS o WhatsApp transaccional del proveedor que ya use la compañía | Sin eso no hay cuenta                                                |
-| Puntos acreditados y canje | Correo, si dejó correo. Odoo ya tiene correo                      | El ticket manda; el correo es copia                                  |
-| Cumpleaños y día Barra     | Correo, con casilla aparte de aceptación                          | Marketing, no hace falta para operar                                 |
-| Push                       | No                                                                | Pide consentimiento, FCM o APNs y un motivo mejor que «abrir la app» |
+| Momento                     | Canal en el MVP                                   | Por qué                                                 |
+| --------------------------- | ------------------------------------------------- | ------------------------------------------------------- |
+| Código de acceso, en prueba | Lo muestra la base de prueba                      | No se envía SMS, WhatsApp ni correo                     |
+| Puntos acreditados y canje  | Correo, si dejó correo. Odoo ya tiene correo      | El ticket manda; el correo es copia                     |
+| Cumpleaños y día Barra      | Correo, con casilla aparte de aceptación          | Marketing, no hace falta para operar                    |
+| Promo al llegar             | Notificación local de la geocerca, en el teléfono | Abre el menú de esa sede. No viaja la coordenada a Odoo |
+| Ubicación del Wallet        | Extra opcional                                    | Asoma el pase. No reemplaza la promo ni abre el menú    |
 
 El módulo público «Telegram Alerts» se ve como aviso interno. No es el canal
 del cliente.
 
 ### Pagos
 
-MVP: el pago no pasa por la app.
+MVP: se paga en caja. El QR de la mesa arma el pedido y no cobra. La app
+tampoco cobra. El canje de un producto entra en ese mismo ticket, antes de
+cobrar, y ese tramo no suma puntos.
 
-Cuando exista pedido en la app, el pago lo cobra un proveedor (no el
-teléfono guardando el PAN) y el pedido nace en Odoo como una orden que el
-POS o el eCommerce ya sepan facturar. Los puntos solo se combinan con ese
-pago si el canje ya quedó como recompensa de la orden. Misma regla que la
-propuesta de caja: una sola orden, un solo documento.
+Un pago dentro de la app, si algún día existe, sería otra fase y otro
+proveedor. No está en este corte. Chile, cuando llegue, también cobra en
+su caja.
 
 Chile, en esa fase, usa los medios que la sociedad chilena ya tenga en
 Odoo. No se copia Nequi ni Daviplata.
@@ -200,17 +206,22 @@ Odoo. No se copia Nequi ni Daviplata.
 
 ```text
 teléfono
-  └─ app (cuenta, saldo, código, premio)
+  └─ app
+        geocerca por sede → promo local y menú de esa sede
+        pase Apple / Google → sellos y saldo, se actualiza al cobrar
         └─ API de Libertario
-              autentica al miembro
-              no guarda la clave maestra de Odoo en el teléfono
-              └─ Odoo, una compañía por país
+              solo la base de prueba
+              rechaza libertariocoffee.odoo.com
+              └─ Odoo de prueba
                     res.partner
                     loyalty.program / rule / reward
                     loyalty.card          ← saldo
-                    pos.order              ← gana y canjea
-                    factura electrónica    ← Jorels en Colombia
+                    pos.order              ← pedido de mesa y cobro en caja
+                    factura de prueba
 ```
+
+El dibujo completo, con el QR de mesa y las variables de entorno, está en
+[experiencia-tienda.md](experiencia-tienda.md). La API no abre producción.
 
 La API es un controlador acotado dentro de Odoo o un servicio chico delante.
 Habla con modelos concretos. No publica XML-RPC de administrador hacia el
@@ -277,42 +288,48 @@ un ejemplo propio; ver [analisis-rea.md](analisis-rea.md).
 
 ## MVP y corte
 
-Definición de hecho, en una tienda piloto de Colombia:
+Definición de hecho, en la tienda piloto, contra la base de prueba:
 
-- Un cliente nuevo termina el alta y muestra un código.
-- La caja lo identifica, cobra un pedido real y el saldo sube lo acordado.
-- El mismo cliente canjea el premio de bebida, paga la diferencia si la hay,
-  y esa orden no suma puntos por el tramo canjeado.
-- La factura electrónica de las dos órdenes queda aceptada.
-- Un pedido sin código no suma.
-- Un segundo intento del código de canje no aplica.
-- El saldo de la app y el de `loyalty.card` coinciden al refrescar.
+- La API se niega a abrir el host de producción.
+- Una geocerca de esa sede muestra la promo vigente y abre su menú. Una
+  promo vencida no aparece. La ubicación del Wallet no hace falta para
+  esta prueba.
+- El QR de una mesa deja un pedido sin pago. «Llamar mesero» se ve en la
+  caja. El cobro es en el mostrador.
+- Esa compra suma puntos por el gasto elegible y llena un sello.
+- El canje de un producto entra en el mismo ticket y no suma puntos sobre
+  lo canjeado.
+- El saldo de la app, el de `loyalty.card` y, cuando ya existan las
+  cuentas, el del pase, coinciden después de cobrar.
+- Un pedido sin código no suma. Un segundo uso del código de canje no
+  aplica.
+- No sale correo ni SMS.
 
-Hasta que esas siete cosas pasen en el POS de prueba, no hay piloto en
-tienda.
+Hasta que eso pase en el POS de prueba, no hay piloto con clientes.
 
 Orden de construcción, cuando se autorice:
 
-1. Programa de loyalty de una compañía colombiana, tres premios apagados,
-   una bebida encendida. Sin app.
-2. Prueba de factura con Jorels en los tres casos de canje.
-3. API de alta, saldo, código de tarjeta e historial.
-4. App con las tres pantallas de alta y la pantalla de saldo.
-5. Código de canje de un solo uso y botón de recompensa en el POS.
-6. Piloto en una tienda, dos semanas, con alguien de caja en el diseño.
-7. Recién ahí, cumpleaños y el correo promocional.
+1. Base de prueba, loyalty, una promo con horario y una mesa. Sin tocar
+   producción.
+2. Guardia de host. Una llamada al host de producción tiene que fallar.
+3. QR sin pago, aviso al mesero y cobro en caja.
+4. Puntos y sellos sobre esa orden.
+5. Geocerca y notificación local en un build propio.
+6. Pases firmados, solo si el certificado y la cuenta de Google ya están
+   fuera del repo. Si no están, esta casilla espera y el resto sigue.
+7. Extra de ubicaciones del Wallet, al final y apagado por defecto.
 
 ## Roadmap
 
-| Corte                       | Entra                                                                                             | Sigue fuera                 |
-| --------------------------- | ------------------------------------------------------------------------------------------------- | --------------------------- |
-| 0. Caja                     | Loyalty nativo, prueba DIAN, código de tarjeta, sin cliente por defecto                           | App                         |
-| 1. MVP                      | Alta, saldo, historial, un premio, una tienda piloto                                              | Niveles, push, pagos, Chile |
-| 2. Hábito                   | Niveles Casa / Barra / Oficio, cumpleaños, correo con permiso                                     | Push, wallet                |
-| 3. Más tiendas Colombia     | El mismo programa en la red colombiana. El premio puede variar por tienda si el POS ya lo permite | Otra moneda                 |
-| 4. Chile                    | Compañía, programa en CLP, prueba SII, la misma app                                               | Sumar puntos entre países   |
-| 5. Pedido propio            | Recoger en tienda, pago con proveedor, canje dentro de esa orden                                  | Agregadores                 |
-| 6. Solo si finanzas lo pide | Gift card de Odoo, separada del punto. FIFO de lotes si el vencimiento por inactividad no alcanza | Wallet disfrazado de puntos |
+| Corte                       | Entra                                                                                             | Sigue fuera                     |
+| --------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------- |
+| 0. Caja de prueba           | Loyalty, promo con horario, mesa, cobro en caja, sin cliente por defecto                          | Producción, pago en el teléfono |
+| 1. MVP                      | Geocerca con push local, QR sin pago, puntos, sellos y pases si ya hay cuentas                    | Ubicación del Wallet, Chile     |
+| 2. Hábito                   | Niveles Casa / Barra / Oficio, cumpleaños, correo con permiso                                     | Pago en la app                  |
+| 3. Más tiendas Colombia     | Una geocerca por sede. El premio puede variar por tienda si el POS ya lo permite                  | Otra moneda                     |
+| 4. Chile                    | Compañía, programa en CLP, prueba SII, la misma app, cobro en caja                                | Sumar puntos entre países       |
+| 5. Extra de Wallet          | Hasta diez sedes en el pase, como orientación                                                     | Usarlo como canal de promo      |
+| 6. Solo si finanzas lo pide | Gift card de Odoo, separada del punto. FIFO de lotes si el vencimiento por inactividad no alcanza | eWallet disfrazado de puntos    |
 
 No hay fecha en este corte. El orden es el contrato: nada de la fila
 siguiente sale si la fila anterior no facturó bien.
@@ -325,11 +342,30 @@ siguiente sale si la fila anterior no facturó bien.
 | Jorels rechaza la nota de la recompensa                   | El premio no se enciende. No se parcha desde la app                             |
 | El cliente por defecto se queda con los puntos            | Se apaga en las cajas del piloto y se revisa en el cierre del día               |
 | El código corto se fotografía y se usa dos veces          | Un solo uso, vida de minutos, atado a la tarjeta                                |
-| Pedir la cédula «porque todos la piden»                   | No está en el alta. Se reabre solo con un motivo fiscal                         |
+| Pedir la cédula en el alta                                | Sigue abierto. En caja se usa el código de la tarjeta                           |
 | Copiar umbrales de otra marca                             | Los de esta nota son hipótesis. Se recalculan con tickets de Libertario         |
 | Tratar el punto como pasivo financiero                    | El texto del programa dice que no es dinero ni es transferible. Legal lo revisa |
 
+## Decisiones abiertas
+
+Cerradas para el MVP, y ya reflejadas arriba: el pago es en caja, y la
+promo es push nativo con geocerca en la app. La ubicación del Wallet queda
+como extra opcional.
+
+Siguen sin dueño:
+
+1. **Cuenta de Apple Developer y emisor de Google Wallet.** Sin las dos, el
+   pase se queda en el JSON de muestra. El certificado, la contraseña y la
+   cuenta de servicio van a variables de entorno o a una bóveda. No al
+   repositorio.
+2. **Tienda piloto y versión de Odoo.** La página pública no fija la
+   versión. El QR de mesa y el botón de mesero se prueban en una base de
+   prueba, nunca en `libertariocoffee.odoo.com`.
+3. **Cédula en el alta.** En caja basta el código de la tarjeta. Pedir el
+   documento al registrarse cambia el dato que se guarda y, quizá, a nombre
+   de quién sale la factura. Legal y cartera lo cierran.
+
 ## Qué no se construyó
 
-No hay app, módulo Odoo, ni cambio de caja en este trabajo. El único cambio
-en el repositorio son estas notas y su exclusión del sitio público de REA.
+No hay app, no hay módulo instalado y no hubo llamada a Odoo. No se envió
+correo ni mensaje. Las notas están fuera del sitio público de REA.
