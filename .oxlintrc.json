@@ -27,6 +27,17 @@
   },
   "overrides": [
     {
+      "files": ["demo/**/*.{js,mjs,ts,tsx}"],
+      "env": { "node": true, "browser": true },
+      "rules": {
+        "complexity": "off",
+        "max-depth": "off",
+        "max-lines": "off",
+        "max-lines-per-function": "off",
+        "max-params": "off"
+      }
+    },
+    {
       "files": [
         "scripts/electron-active-hook*.cjs",
         "tests/conformance/readiness/electron/*.js",
@@ -108,6 +119,7 @@
     ".codex",
     ".devin",
     ".factory",
-    "third_party"
+    "third_party",
+    "demo/**/vendor/**"
   ]
 }
